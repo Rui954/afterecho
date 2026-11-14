@@ -31,7 +31,7 @@
 
 ### 玩家
 
-1. 到 [Releases](../../releases) 下载 `Afterecho.tmod`；
+1. 到 [Releases](https://github.com/Rui954/afterecho/releases) 下载 `Afterecho.tmod`；
 2. 放进 `Documents/My Games/Terraria/tModLoader/Mods/`；
 3. 启动 tModLoader → **Mods** → 启用《余响》→ **Reload Mods**；
 4. 进游戏，按 [玩家指南](余响_玩家指南.html) 走：**玻璃 10 + 透镜 1 + 落星 3** 在工作台做「相位镜」，击败克苏鲁之眼后即可展开回响庭。
