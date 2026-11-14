@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>《余响》Afterecho — 玩家游玩介绍（流程 / 触发 / 常见问题）</title>
+<style>
+  :root {
+    --paper: #f7f4ec;
+    --ink: #2c2a27;
+    --muted: #7a746a;
+    --accent: #8a6a49;
+    --line: #ddd5c5;
+    --card: #fffdf8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0 18px 80px;
+    background: var(--paper); color: var(--ink);
+    font: 16px/1.85 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { padding: 42px 0 22px; border-bottom: 2px solid var(--ink); margin-bottom: 26px; }
+  header .kicker { font-size: 12px; letter-spacing: .28em; color: var(--accent); margin-bottom: 12px; }
+  header h1 { font-size: 30px; line-height: 1.3; margin: 0 0 10px; letter-spacing: .04em; }
+  header .sub { color: var(--muted); font-size: 14px; margin: 0; }
+  details.toc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 34px;
+  }
+  details.toc summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+  details.toc ol { margin: 12px 0 2px; padding-left: 20px; }
+  details.toc li { margin: 5px 0; }
+  details.toc li.sub { margin-left: 14px; font-size: 13px; color: var(--muted); }
+  details.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--line); }
+  details.toc li.sub a { color: var(--muted); }
+  h2 {
+    font-size: 21px; margin: 46px 0 16px; padding-left: 12px;
+    border-left: 4px solid var(--accent); scroll-margin-top: 16px;
+  }
+  h3 { font-size: 18px; margin: 30px 0 12px; scroll-margin-top: 16px; }
+  p { margin: 12px 0; }
+  strong { color: #1d1b18; }
+  blockquote {
+    margin: 18px 0; padding: 12px 16px; background: var(--card);
+    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; color: #4a463f;
+  }
+  blockquote p { margin: 4px 0; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  table {
+    display: block; width: 100%; overflow-x: auto; border-collapse: collapse;
+    margin: 18px 0; font-size: 14px; background: var(--card);
+    -webkit-overflow-scrolling: touch;
+  }
+  th, td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; white-space: nowrap; }
+  th { background: #efe9dc; font-weight: 600; }
+  code {
+    background: #ece6d8; padding: 1px 5px; border-radius: 4px;
+    font-size: .9em; font-family: ui-monospace, Menlo, Consolas, monospace;
+  }
+  pre { background: #ece6d8; padding: 14px; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  sup.cite { color: var(--muted); font-size: 10px; margin-left: 1px; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+  .foot { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
+          color: var(--muted); font-size: 13px; text-align: center; }
+  a.top { display: block; text-align: center; color: var(--accent); font-size: 13px; margin-top: 28px; }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">TERRARIA · ORIGINAL CONTENT MOD</div>
+  <h1>《余响》Afterecho</h1>
+  <p class="sub">玩家游玩介绍 · 流程 · 触发条件 · 常见问题</p>
+</header>
+<details class="toc" open>
+  <summary>目录</summary>
+  <ol><li><a href="#sec-1">一分钟速览</a></li>
+<li><a href="#sec-2">一、这模组到底在玩什么</a></li>
+<li><a href="#sec-3">二、它会动我的存档吗</a></li>
+<li><a href="#sec-4">三、完整流程：从开新档到终局</a></li>
+<li class="sub"><a href="#sec-5">幕 0 · 准备期（开新档 ～ 克苏鲁之眼）</a></li>
+<li class="sub"><a href="#sec-6">第一幕 · 浅庭（击败克苏鲁之眼后）</a></li>
+<li class="sub"><a href="#sec-7">第二幕 · 褶庭（击败血肉墙 / 进入困难模式后）</a></li>
+<li class="sub"><a href="#sec-8">第三幕 · 逆庭（击败世纪之花后）</a></li>
+<li class="sub"><a href="#sec-9">第四幕 · 全谱庭（击败月亮领主后）</a></li>
+<li class="sub"><a href="#sec-10">通关之后 · 全谱回响</a></li>
+<li><a href="#sec-11">四、触发条件速查</a></li>
+<li><a href="#sec-12">五、庭内的时间：稳定度</a></li>
+<li><a href="#sec-13">六、12 件装备怎么拿、代价是什么</a></li>
+<li><a href="#sec-14">七、几个机制怎么应对</a></li>
+<li><a href="#sec-15">八、设置与多人</a></li>
+<li><a href="#sec-16">九、常见问题</a></li>
+<li><a href="#sec-17">十、只想尝鲜：最短路线</a></li></ol>
+</details>
+<article>
+<blockquote>
+<p>世界不记得你杀了谁，只记得你怎么杀的。</p>
+</blockquote>
+<p>这份是给<strong>要上手玩的人</strong>看的：什么时候能玩、怎么触发、一路怎么走、卡住了怎么办。不需要懂模组开发，也不需要装任何前置。</p>
+<hr />
+<h2 id="sec-1">一分钟速览</h2>
+<ul>
+<li>它<strong>不改你的世界</strong>：不生成方块、不扩散、不变原版 Boss 顺序、不碰配方和掉落表。进去看看，出来时一格没变。</li>
+<li>它<strong>不给你更强的装备</strong>：12 件装备全是换玩法，每件都带一条代价。</li>
+<li>它只在**你主动举起「相位镜」**之后才出现。不举，世界里什么都不会发生。</li>
+<li>敌人<strong>不会变强</strong>，只是学会你的打法。破解方式不是刷装备，是<strong>换个打法</strong>。</li>
+<li>一条完全可跳过的支线：跟着原版进度走，每个大节点之后多一层庭、一场 Boss。不想打，跳过完全不影响原版通关。</li>
+</ul>
+<hr />
+<h2 id="sec-2">一、这模组到底在玩什么</h2>
+<p>你每一次命中，都会被悄悄记下四件事：用什么打、离多远、当时在不在移动、从哪个方向来。</p>
+<p>没有进度条，没有百分比，没有弹窗。你只会慢慢发现：地面纹路改了走向，环境音换了音色，敌人开始往你不习惯的位置站。世界在记住你的习惯。</p>
+<p>于是「最顺手的那一招」会渐渐不好使——不是敌人血厚了，是它们<strong>针对你的站位</strong>了。站着远远放魔法，它们绕后；贴身冲刺，它们边退边拉开。换把武器、换个距离、多走两步，几秒内世界就换个回应。</p>
+<p>四场 Boss 全在问同一件事：<strong>熟练，会不会被反过来用？</strong></p>
+<hr />
+<h2 id="sec-3">二、它会动我的存档吗</h2>
+<p>不会。回响庭是一层<strong>叠加的拓印</strong>，主世界的建筑、箱子、NPC 都在原处，只是褪成半透明。退出后什么都没改。</p>
+<ul>
+<li>零地形写入、零主世界刷怪：庭外的怪一只都不会多。</li>
+<li>庭内的怪和敌对弹幕，在你退出时全部清干净。</li>
+<li>谱系只存在游戏运行时，<strong>不写进存档</strong>；关掉配置或卸载模组，存档零残留。</li>
+<li>不硬依赖任何模组，可以和其他大型内容模组一起装。</li>
+</ul>
+<hr />
+<h2 id="sec-4">三、完整流程：从开新档到终局</h2>
+<p>模组<strong>不插队</strong>。它完全挂靠原版进度：你照常打原版，每过一个节点，回响庭就多开放一层。</p>
+<h3 id="sec-5">幕 0 · 准备期（开新档 ～ 克苏鲁之眼）</h3>
+<p><strong>能做什么</strong>：先做一面<strong>相位镜</strong>——工作台旁，<code>透镜 ×1 + 落星 ×3 + 玻璃 ×10</code>。</p>
+<p><strong>怎么触发</strong>：这时候还触发不了任何东西。举起相位镜只会收到一句「世界还没有开始记录你」。先把原版前期过完，做出武器和场地。</p>
+<blockquote>
+<p>别急着囤材料，庭还没开，回声砂和残谱现在拿不到。</p>
+</blockquote>
+<h3 id="sec-6">第一幕 · 浅庭（击败克苏鲁之眼后）</h3>
+<p><strong>开放条件</strong>：击败克苏鲁之眼。此时相位镜可用，回响庭第 1 层显影。</p>
+<p><strong>怎么触发 Boss</strong>：</p>
+<ol>
+<li>工作台做<strong>初痕之页</strong>（<code>透镜 ×1 + 落星 ×3 + 玻璃 ×8</code>）。</li>
+<li>举起相位镜 → 进入回响庭。</li>
+<li>在<strong>庭内</strong>使用初痕之页 → 唤出<strong>描摹者</strong>。</li>
+</ol>
+<p><strong>打什么</strong>：它几乎不主动攻击，而是把你<strong>上一场战斗走过的路</strong>重画一遍，几秒后那条路变成伤害带。第一次打没有「上一场」，会改成实时描摹你当前的路线。</p>
+<p><strong>怎么破</strong>：刻意走一条和以往不同的路。别站桩、别沿老路线绕圈。</p>
+<p><strong>拿到什么</strong>：回声砂 4–7、残谱 2–3。每次召唤消耗一页。</p>
+<h3 id="sec-7">第二幕 · 褶庭（击败血肉墙 / 进入困难模式后）</h3>
+<p><strong>开放条件</strong>：进入困难模式，第 2 层开放。</p>
+<p><strong>怎么触发</strong>：<strong>复写之页</strong>（<code>回声砂 ×12 + 残谱 ×3 + 光明之魂 ×5</code>）→ 庭内使用 → <strong>对页</strong>。</p>
+<p><strong>打什么</strong>：书页在你<strong>最常用的两种战术</strong>之间轮流翻页，弹幕形状跟着变。</p>
+<p><strong>怎么破</strong>：用第三种打法命中它，书页会「空白」一小会儿，那是输出窗口。所以进这一幕前，包里最好带两种以上不同伤害类型的武器。</p>
+<p><strong>拿到什么</strong>：回声砂 8–13、残谱 4–6。</p>
+<h3 id="sec-8">第三幕 · 逆庭（击败世纪之花后）</h3>
+<p><strong>开放条件</strong>：击败世纪之花，第 3 层开放。</p>
+<p><strong>怎么触发</strong>：<strong>逆谱之页</strong>（<code>回声砂 ×20 + 残谱 ×8 + 恐惧之魂 ×5</code>）→ 庭内使用 → <strong>缄口</strong>。</p>
+<p><strong>打什么</strong>：每 9 秒「收录」你手里的武器 6 秒，被收录的武器打不出伤害。</p>
+<p><strong>怎么破</strong>：这不是惩罚。封印期间每次挥击都在攒「未言」，<strong>换一把武器</strong>的瞬间，攒的层数一次性炸成范围回响。被封住的 6 秒是蓄力，不是空窗。带两把武器进场即可。</p>
+<p><strong>拿到什么</strong>：回声砂 14–21、残谱 7–10。</p>
+<h3 id="sec-9">第四幕 · 全谱庭（击败月亮领主后）</h3>
+<p><strong>开放条件</strong>：击败月亮领主，第 4 层开放。</p>
+<p><strong>怎么触发</strong>：<strong>全谱之页</strong>（<code>回声砂 ×30 + 残谱 ×15 + 力量之魂 ×5 + 日耀碎片 ×8</code>）→ 庭内使用 → <strong>余响本身</strong>。</p>
+<p><strong>打什么</strong>：它没有固定招式。开场从你整局最常做的 5 个动作里，生成 5 个半透明<strong>残影</strong>，每 4 秒登场一个，每个只会你最擅长那一招。残影全灭前，本体打不动。</p>
+<p><strong>怎么破</strong>：残影数值固定，<strong>你变强不会让这一战变简单</strong>，只会让镜像更熟悉你。老老实实换节奏、逐个拆。</p>
+<p><strong>拿到什么</strong>：<strong>全谱拓本</strong>（终局纪念）、残谱 12–19、回声砂 20–29。</p>
+<h3 id="sec-10">通关之后 · 全谱回响</h3>
+<p>举起<strong>全谱拓本</strong>使用一次，就能<strong>擦掉一条</strong>被世界记住的动作。擦得越多，拓本越薄、称号越特别——<strong>属性一点不加</strong>。这是模组唯一的「难度自定义」：你自己决定让世界忘掉多少，而不是被迫打更难的连战。</p>
+<hr />
+<h2 id="sec-11">四、触发条件速查</h2>
+<table>
+<thead>
+<tr>
+  <th>想做什么</th>
+  <th>前置条件</th>
+  <th>怎么做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>展开回响庭</td>
+  <td>击败克苏鲁之眼</td>
+  <td>举起相位镜使用</td>
+</tr>
+<tr>
+  <td>第 2 / 3 / 4 层</td>
+  <td>血肉墙 / 世纪之花 / 月亮领主</td>
+  <td>自动开放，无需额外操作</td>
+</tr>
+<tr>
+  <td>四场 Boss</td>
+  <td>对应层数 + 人在庭内 + 当前无 Boss</td>
+  <td>庭内使用对应「之页」</td>
+</tr>
+<tr>
+  <td>掉回声砂</td>
+  <td>稳定度低于 30%</td>
+  <td>打庭内的「拓影」</td>
+</tr>
+<tr>
+  <td>收拢拓印</td>
+  <td>不在 Boss 战中</td>
+  <td>再举一次相位镜</td>
+</tr>
+</tbody>
+</table>
+<p>四页召唤物共用同一套硬门槛：不在庭内、层数不够、或已有 Boss 在场，用了只会收到一句提示，不会白耗那一页。</p>
+<hr />
+<h2 id="sec-12">五、庭内的时间：稳定度</h2>
+<p>进庭时稳定度 100%，<strong>每秒掉 0.35</strong>，约 <strong>4 分 45 秒</strong>归零；归零自动收拢拓印，<strong>已拿到的材料全部保留</strong>。</p>
+<ul>
+<li>归零时若 Boss 还在场，Boss 会随拓印一起消散——所以一场架别拖太久。</li>
+<li>相位镜有 <strong>20 秒冷却</strong>；Boss 战期间既不能展开、也不能收拢，避免逃课。</li>
+<li>多人时全场共用<strong>一条</strong>稳定度，不会因为人多而扣得更快。</li>
+</ul>
+<p><strong>压线刷材料</strong>：只有稳定度跌破 30%（大约进庭 3 分 20 秒之后）时，庭内「拓影」才会掉<strong>回声砂</strong>。想攒够后面几幕的材料，就得在庭里多待一会儿、把稳定度压下去。这是整条材料链的节奏轴，不是刷怪刷出来的。</p>
+<p><strong>残谱</strong>主要来自四场 Boss；稳定度还高时，拓影也有小概率掉 1 个。</p>
+<hr />
+<h2 id="sec-13">六、12 件装备怎么拿、代价是什么</h2>
+<p>全部用<strong>原版材料 + 回声砂 / 残谱</strong>在<strong>工作台 / 铁砧 / 桌子</strong>合成，不新增矿物、不新增制作站。每件都只改玩法，代价写死。</p>
+<table>
+<thead>
+<tr>
+  <th>装备</th>
+  <th>效果 / 代价</th>
+  <th>主要材料</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>相位镜</td>
+  <td>进出回响庭；有冷却</td>
+  <td>透镜·落星·玻璃</td>
+</tr>
+<tr>
+  <td>折光刃</td>
+  <td>0.8 秒后在「上一秒你站的地方」补一记回响斩 / 本体伤害七折</td>
+  <td>金锭 8 + 回声砂 6</td>
+</tr>
+<tr>
+  <td>错位弦</td>
+  <td>下一支箭从上一支的落点射出 / 单发 −25%、无暴击</td>
+  <td>木材 20 + 透镜 2 + 回声砂 6</td>
+</tr>
+<tr>
+  <td>残页</td>
+  <td>3 秒后补完为跟随你的范围回响 / 魔力 ×1.6、不能连吟</td>
+  <td>书 1 + 落星 5 + 回声砂 8</td>
+</tr>
+<tr>
+  <td>静默坠</td>
+  <td>谱系窗口减半，更快摆脱针对</td>
+  <td>锁链 2 + 回声砂 5</td>
+</tr>
+<tr>
+  <td>双向镜</td>
+  <td>按 <code>P</code> 回滚一次谱系 / 稳定度 −15%</td>
+  <td>透镜 2 + 残谱 2</td>
+</tr>
+<tr>
+  <td>未言坠</td>
+  <td>被收录时多攒 1 层 / 收录多 1 秒</td>
+  <td>锁链 2 + 残谱 4</td>
+</tr>
+<tr>
+  <td>折页靴</td>
+  <td>高速留残影，可承接回响斩 / 移速 −10%</td>
+  <td>赫尔墨斯靴 + 回声砂 10</td>
+</tr>
+<tr>
+  <td>留白戒</td>
+  <td>连续 3 次不用主导战术可无视一次针对 / 触发后锁 8 秒</td>
+  <td>银锭 6 + 残谱 3</td>
+</tr>
+<tr>
+  <td>回声砂 / 残谱</td>
+  <td>合成材料，来自压线探索与 Boss</td>
+  <td>不可合成</td>
+</tr>
+<tr>
+  <td>全谱拓本</td>
+  <td>擦除一条记录，纯纪念 / 无属性</td>
+  <td>终局 Boss 掉落</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>P</code> 是默认键位，可在游戏按键设置里改「回滚谱系快照」。</p>
+</blockquote>
+<hr />
+<h2 id="sec-14">七、几个机制怎么应对</h2>
+<p><strong>「某一招突然不好使了」</strong> → 姿态在针对你的主导战术。换武器类型、换距离带、多位移，几秒内世界就重算。被针对时敌人有最多 12% 的软减伤，回到「常态」立刻归零；「留白戒」也能跳过一次。</p>
+<p><strong>「怎么知道世界记住了我」</strong> → 不给你看数值。看地面纹路走向、听环境音音色、看敌人站位习惯。想临时确认，可在模组配置里打开「调试：显示主导战术」，正式玩建议关掉。</p>
+<p><strong>「被收录了怎么办」</strong> → 别停手，继续挥击攒层数，然后切武器引爆。</p>
+<p><strong>「终局打不过」</strong> → 不是装备不够。残影数值不随你成长，换节奏、别用最熟的那一套。</p>
+<hr />
+<h2 id="sec-15">八、设置与多人</h2>
+<p>模组配置里能改的：</p>
+<ul>
+<li><strong>启用模组</strong>：一键全关，主世界零影响（默认开）。</li>
+<li><strong>深谱模式</strong>：只改敌人 AI 与弹幕编排，生命与伤害倍率<strong>锁死 1.00</strong>，默认<strong>关</strong>。想更烧脑再开。</li>
+<li><strong>启用反谱姿态</strong>：关掉后敌人不再针对你的打法，纯探索模式。</li>
+<li><strong>庭内生成敌怪</strong>：关掉后只留 Boss 与场景。</li>
+<li><strong>稳定度消耗倍率</strong>：只影响能在庭里待多久，不影响任何战斗数值。</li>
+</ul>
+<p><strong>多人</strong>：谱系按玩家各自记录；回响庭是共享实例，姿态取队伍<strong>均值</strong>（不会盯着一个人针对）；稳定度全场一条；庭内敌怪同时最多 8 只。配置由服务端统一，避免各人判定不一致。</p>
+<hr />
+<h2 id="sec-16">九、常见问题</h2>
+<p><strong>相位镜做了却用不了？</strong> 还没击败克苏鲁之眼。先过原版前期。</p>
+<p><strong>举起镜子没反应？</strong> 三种可能：20 秒冷却没到、附近有 Boss 在场、或配置里把模组关了。</p>
+<p><strong>召唤物用了没出 Boss？</strong> 检查三件事：人是不是在庭内、层数够不够、场上是不是已经有 Boss。</p>
+<p><strong>回声砂一直不掉？</strong> 稳定度还高于 30%。在庭里多待一会儿压到红区再打「拓影」；也确认配置没关「庭内生成敌怪」。</p>
+<p><strong>打着打着被弹出来了？</strong> 稳定度归零。材料保留，在场 Boss 会消散，回庭重新来即可，没有额外惩罚。</p>
+<p><strong>能不能跳幕 / 提前打终局？</strong> 不能。层数由原版进度锁死，不越阶。</p>
+<p><strong>打不过会掉东西吗？</strong> 只消耗那一页召唤物。退出、换打法、下次再来，没有惩罚机制。</p>
+<p><strong>会不会和其他模组冲突？</strong> 不硬依赖任何模组，也不改原版进度与掉落表，可同装。</p>
+<p><strong>会不会毁存档？</strong> 不会。零写入、可一键关闭、卸载零残留。</p>
+<hr />
+<h2 id="sec-17">十、只想尝鲜：最短路线</h2>
+<ol>
+<li>打完克苏鲁之眼 → 做相位镜 + 初痕之页。</li>
+<li>进庭，唤描摹者，走一条和平时完全不同的路，看它把老路线描成伤害带。</li>
+<li>待到稳定度见底，顺手打几只拓影拿回声砂。</li>
+<li>出来看一眼房子——一格没变。</li>
+</ol>
+<p>这一圈大约五分钟，就能明白整个模组在说什么。后面三幕，等原版进度到了自然开放。</p>
+<hr />
+<p>熟练本来是件好事。这个模组只是温柔地问一句：<strong>如果被它记住了呢？</strong></p>
+
+</article>
+<a class="top" href="#">↑ 回到顶部</a>
+<div class="foot">《余响 / Afterecho》原创企划 · 纸 · 墨 · 声纹 · 留白</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\tModLoader.targets" />
+  <PropertyGroup>
+    <AssemblyName>Afterecho</AssemblyName>
+    <RootNamespace>Afterecho</RootNamespace>
+    <!-- tMLMod.targets 只在 BuildMod=true 时设置这两项；显式写死，
+         这样 `dotnet build -p:BuildMod=false` 的纯编译检查也能工作。 -->
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+</Project>

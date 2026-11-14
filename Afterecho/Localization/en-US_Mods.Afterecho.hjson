@@ -1,0 +1,285 @@
+Items: {
+	PhaseLens: {
+		DisplayName: Phase Lens
+		Tooltip:
+			'''
+			Unfolds or folds away the Reverie at your position
+			The tier you may enter follows vanilla progression
+			The overworld is never altered
+			Cannot be used during a boss fight
+			'''
+	}
+
+	EchoShard: {
+		DisplayName: Echo Shard
+		Tooltip: Sand that only settles when stability runs low.
+	}
+
+	RescorePage: {
+		DisplayName: Rescore Page
+		Tooltip: A page torn from the imprint, used to rewrite a cost.
+	}
+
+	FullScoreCodex: {
+		DisplayName: Full Score Codex
+		Tooltip:
+			'''
+			Records the actions the world remembered
+			Use it to erase one record: cosmetic only, no stats
+			'''
+	}
+
+	Foldblade: {
+		DisplayName: Foldblade
+		Tooltip:
+			'''
+			70% of a same-tier sword's base damage
+			An echo slash lands where you stood 0.8s ago
+			'''
+	}
+
+	OffsetBow: {
+		DisplayName: Offset Bow
+		Tooltip:
+			'''
+			The next arrow starts where the last one landed
+			-25% damage, no critical strike bonus
+			'''
+	}
+
+	UnfinishedPageWeapon: {
+		DisplayName: Unfinished Page
+		Tooltip:
+			'''
+			Completes into a burst after 3s, following your movement
+			x1.6 mana cost, cannot be channeled
+			'''
+	}
+
+	SilentPendant: {
+		DisplayName: Silent Pendant
+		Tooltip:
+			'''
+			Halves the Ledger window so postures fade faster
+			+20% stability drain
+			'''
+	}
+
+	TwoWayMirror: {
+		DisplayName: Two-Way Mirror
+		Tooltip: Press the rollback key (P) in the Reverie: -15% stability
+	}
+
+	UnspokenPendant: {
+		DisplayName: Unspoken Pendant
+		Tooltip:
+			'''
+			+1 Unspoken stack when silenced
+			Silence lasts 1s longer
+			'''
+	}
+
+	FolioBoots: {
+		DisplayName: Folio Boots
+		Tooltip:
+			'''
+			Leaves an afterimage at high speed that can carry one echo slash
+			-10% movement speed
+			'''
+	}
+
+	BlankRing: {
+		DisplayName: Blank Ring
+		Tooltip:
+			'''
+			Three off-pattern hits ignore one posture resistance
+			8s lockout after it triggers
+			'''
+	}
+
+	TracerSummon: {
+		DisplayName: Page of First Trace
+		Tooltip: Summons the Tracer in the Reverie. Tier 1 required.
+	}
+
+	VersoSummon: {
+		DisplayName: Page of Rewriting
+		Tooltip: Summons the Verso in the Reverie. Tier 2 required.
+	}
+
+	HushSummon: {
+		DisplayName: Page of Counterscore
+		Tooltip: Summons the Hush in the Reverie. Tier 3 required.
+	}
+
+	AfterechoSummon: {
+		DisplayName: Page of Full Score
+		Tooltip: Summons the Afterecho in the Reverie. Tier 4 required.
+	}
+}
+
+NPCs: {
+	Tracer.DisplayName: The Tracer
+	Verso.DisplayName: The Verso
+	Hush.DisplayName: The Hush
+	AfterechoBoss.DisplayName: The Afterecho
+	EchoShade.DisplayName: Echo Shade
+	EchoWisp.DisplayName: Trace Wisp
+}
+
+Projectiles: {
+	EchoSlash.DisplayName: Echo Slash
+	OffsetArrow.DisplayName: Offset Arrow
+	PageSeed.DisplayName: Unfinished Page
+	PageBurst.DisplayName: Completed Page
+	Afterimage.DisplayName: Folio Afterimage
+	TraceRibbon.DisplayName: Trace Ribbon
+	InkBlot.DisplayName: Ink Blot
+	SilenceWave.DisplayName: Silence Wave
+	MirrorShade.DisplayName: Mirror Shade
+}
+
+Biomes: {
+	ReverieBiome: {
+		DisplayName: The Reverie
+		TownNPCDialogueName: the Reverie Biome
+	}
+}
+
+Configs: {
+	AfterechoConfig: {
+		DisplayName: Afterecho - Settings
+
+		Enabled: {
+			Label: Enable Mod
+			Tooltip: When off, the Ledger and the Reverie are fully disabled.
+		}
+
+		DeepResonance: {
+			Label: Deep Resonance
+			Tooltip: Changes AI and projectile patterns only; stat multipliers stay at 1.00.
+		}
+
+		EnableCounterform: {
+			Label: Enable Counterform
+			Tooltip: When off, enemies no longer adapt their posture.
+		}
+
+		SpawnReverieEnemies: {
+			Label: Spawn Reverie Enemies
+			Tooltip: When off, only bosses and scenery remain.
+		}
+
+		EnableEchoEvents: {
+			Label: Enable Echo Events
+			Tooltip: When off, the optional in-Reverie challenges no longer appear.
+		}
+
+		StabilityDrainScale: {
+			Label: Stability Drain Scale
+			Tooltip: Affects time inside the Reverie only.
+		}
+
+		DebugShowLedger: {
+			Label: Debug: Show Dominant Tactic
+			Tooltip: Keep this off for release.
+		}
+	}
+}
+
+Keybinds.RollbackLedger.DisplayName: Roll back Ledger snapshot
+
+Messages: {
+	RollbackLowStability: Not enough stability to roll back the Ledger snapshot.
+	RollbackDone: Ledger rewound: postures reshuffled, stability -{0}.
+	PhaseLensCooldown: The Phase Lens is still cooling down.
+	ReverieLocked: The world has not started recording you yet.
+	ReverieBossBlocked: The Reverie cannot unfold during a boss fight.
+	ReverieEntered: Imprint unfolded - Layer {0}: the world begins to record you.
+	ReverieExited: Imprint folded away. The overworld is exactly as it was.
+	ReverieExitedPlain: Imprint folded away.
+	AfterechoIntro: The world returns the five actions it remembered.
+	AfterechoEnd: You may erase one remembered action - it will not make you stronger, only the codex thinner.
+	CodexNothing: Nothing has been recorded yet.
+	CodexErased: Erased "{0}". The codex is thinner; you are not stronger.
+	HushSilence: This page has been collected. Say it another way.
+	VersoBlank: The page went blank.
+	SummonNeedsReverie: Unfold the Reverie with the Phase Lens first.
+	SummonTierLocked: The imprint of this layer has not developed yet.
+	SummonBossPresent: An imprint is already present.
+	DebugLedger: "[Ledger] {0} -> {1}"
+}
+
+Ledger: {
+	School: {
+		Melee: Melee
+		Ranged: Ranged
+		Magic: Magic
+		Summon: Summon
+		Other: Other
+	}
+
+	Range: {
+		Contact: Contact
+		Near: Near
+		Mid: Mid
+		Far: Far
+	}
+
+	Motion: {
+		Still: Still
+		Walking: Walking
+		Dashing: Dashing
+		Flying: Flying
+	}
+
+	Approach: {
+		Front: Front
+		Flank: Flank
+		Back: Back
+	}
+
+	Posture: {
+		Normal: Normal
+		Skimmer: Skimmer
+		Waller: Waller
+		Folder: Folder
+	}
+}
+
+Tooltips: {
+	CodexEmpty: No action has been recorded yet.
+	CodexHeader: The world remembers:
+	CodexUsage: Use: erase one record (no stat reward)
+}
+
+Events: {
+	Started: Echo Event - {0}
+	Completed: '''"{0}" was recorded. Something settled on the ground.'''
+	Failed: '''"{0}" faded. You lost nothing.'''
+	Cancelled: The echo event was interrupted.
+
+	BlankWalk: {
+		Name: Blank Walk
+		Start: Five footholds surface. Step on them in order along a route you have not used.
+		Hint: Walking slowly still counts. Avoid your usual line.
+	}
+
+	Offhand: {
+		Name: Offhand
+		Start: Land three hits with a damage type that is not your dominant one.
+		Hint: Swap a weapon, or swap an approach.
+	}
+
+	Counterscore: {
+		Name: Counterscore
+		Start: Land one hit with each of three different damage types.
+		Hint: Melee, ranged, magic, summon: any three.
+	}
+
+	Blank: {
+		Name: Blank
+		Start: For a short while, deal no damage at all.
+		Hint: Hold your hand, keep moving, let it pass.
+	}
+}

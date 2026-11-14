@@ -1,0 +1,290 @@
+Items: {
+	PhaseLens: {
+		DisplayName: 相位镜
+		Tooltip:
+			'''
+			在当前位置展开或收拢「回响庭」
+			可进入的层数由原版进度决定
+			主世界地形不会受到任何改变
+			Boss 战期间无法使用
+			'''
+	}
+
+	EchoShard: {
+		DisplayName: 回声砂
+		Tooltip: 稳定度将尽时才落下的细砂，凝着一段还没散去的动作。
+	}
+
+	RescorePage: {
+		DisplayName: 残谱
+		Tooltip: 从拓印上撕下的一页，用来改写代价。
+	}
+
+	FullScoreCodex: {
+		DisplayName: 全谱拓本
+		Tooltip:
+			'''
+			记录本局被记住的动作
+			使用可擦去一条记录，只影响外观，不提供属性
+			'''
+	}
+
+	Foldblade: {
+		DisplayName: 折光刃
+		Tooltip:
+			'''
+			本体伤害为同阶剑的 70%
+			命中后 0.8 秒，在上一秒你所在的位置补一记回响斩
+			'''
+	}
+
+	OffsetBow: {
+		DisplayName: 错位弦
+		Tooltip:
+			'''
+			下一支箭从上一支箭的落点射出
+			单发伤害 −25%，不享受暴击加成
+			'''
+	}
+
+	UnfinishedPageWeapon: {
+		DisplayName: 残页
+		Tooltip:
+			'''
+			放出未写完的一页，3 秒后补完为范围回响
+			补完位置跟随你移动
+			魔力消耗 ×1.6，无法连续吟唱
+			'''
+	}
+
+	SilentPendant: {
+		DisplayName: 静默坠
+		Tooltip:
+			'''
+			谱系窗口缩短一半，更快摆脱被针对的姿态
+			稳定度消耗 +20%
+			'''
+	}
+
+	TwoWayMirror: {
+		DisplayName: 双向镜
+		Tooltip:
+			'''
+			按「回滚谱系快照」键（默认 P）在庭内回滚一次
+			稳定度 −15%
+			'''
+	}
+
+	UnspokenPendant: {
+		DisplayName: 未言坠
+		Tooltip:
+			'''
+			被收录时未言层数额外 +1
+			收录时长 +1 秒
+			'''
+	}
+
+	FolioBoots: {
+		DisplayName: 折页靴
+		Tooltip:
+			'''
+			高速位移留下残影，可承接一次回响斩
+			移动速度 −10%
+			'''
+	}
+
+	BlankRing: {
+		DisplayName: 留白戒
+		Tooltip:
+			'''
+			连续 3 次不用主导战术，可无视一次软抗性
+			触发后 8 秒无法再触发
+			'''
+	}
+
+	TracerSummon: {
+		DisplayName: 初痕之页
+		Tooltip: 在回响庭中唤出「描摹者」。需要第一层拓印。
+	}
+
+	VersoSummon: {
+		DisplayName: 复写之页
+		Tooltip: 在回响庭中唤出「对页」。需要第二层拓印。
+	}
+
+	HushSummon: {
+		DisplayName: 逆谱之页
+		Tooltip: 在回响庭中唤出「缄口」。需要第三层拓印。
+	}
+
+	AfterechoSummon: {
+		DisplayName: 全谱之页
+		Tooltip: 在回响庭中唤出「余响本身」。需要第四层拓印。
+	}
+}
+
+NPCs: {
+	Tracer.DisplayName: 描摹者
+	Verso.DisplayName: 对页
+	Hush.DisplayName: 缄口
+	AfterechoBoss.DisplayName: 余响本身
+	EchoShade.DisplayName: 残影
+	EchoWisp.DisplayName: 拓影
+}
+
+Projectiles: {
+	EchoSlash.DisplayName: 回响斩
+	OffsetArrow.DisplayName: 错位箭
+	PageSeed.DisplayName: 未写完的一页
+	PageBurst.DisplayName: 补完的一页
+	Afterimage.DisplayName: 折页残影
+	TraceRibbon.DisplayName: 描摹带
+	InkBlot.DisplayName: 墨晕
+	SilenceWave.DisplayName: 收录波
+	MirrorShade.DisplayName: 镜像弹
+}
+
+Biomes: {
+	ReverieBiome: {
+		DisplayName: 回响庭
+		// TownNPCDialogueName: the Reverie Biome
+	}
+}
+
+Configs: {
+	AfterechoConfig: {
+		DisplayName: 余响 · 设置
+
+		Enabled: {
+			Label: 启用模组
+			Tooltip: 关闭后谱系记录与回响庭全部停用，主世界零影响。
+		}
+
+		DeepResonance: {
+			Label: 深谱模式
+			Tooltip: 只改变敌人 AI 与弹幕编排；生命与伤害倍率恒为 1.00。
+		}
+
+		EnableCounterform: {
+			Label: 启用反谱姿态
+			Tooltip: 关闭后敌人不再针对主导战术切换姿态。
+		}
+
+		SpawnReverieEnemies: {
+			Label: 庭内生成敌怪
+			Tooltip: 关闭后回响庭只保留 Boss 与场景效果。
+		}
+
+		EnableEchoEvents: {
+			Label: 启用回响事件
+			Tooltip: 关闭后庭内不再出现可选的玩法小挑战，主线四幕不受影响。
+		}
+
+		StabilityDrainScale: {
+			Label: 稳定度消耗倍率
+			Tooltip: 只影响停留时长，不影响任何战斗数值。
+		}
+
+		DebugShowLedger: {
+			Label: 调试：显示主导战术
+			Tooltip: 正式发布请保持关闭。
+		}
+	}
+}
+
+Keybinds.RollbackLedger.DisplayName: 回滚谱系快照
+
+Messages: {
+	RollbackLowStability: 稳定度不足，无法回滚谱系快照。
+	RollbackDone: 谱系回卷：姿态重新洗牌，稳定度 −{0}。
+	PhaseLensCooldown: 相位镜还没有冷却完。
+	ReverieLocked: 世界还没有开始记录你。
+	ReverieBossBlocked: 回响庭在 Boss 战期间无法展开。
+	ReverieEntered: 拓印展开 · 第 {0} 层：世界开始记录你。
+	ReverieExited: 拓印收拢，主世界原样如初。
+	ReverieExitedPlain: 拓印收拢。
+	AfterechoIntro: 世界把记住的五个动作，还给了你。
+	AfterechoEnd: 你可以擦去一条被记住的动作 —— 那不会让你更强，只会让拓本更薄。
+	CodexNothing: 拓本上还没有可擦去的动作。
+	CodexErased: 擦去了「{0}」。拓本更薄了，你并没有变强。
+	HushSilence: 这一页被收录了：换个说法。
+	VersoBlank: 书页空白了。
+	SummonNeedsReverie: 请先用相位镜展开回响庭。
+	SummonTierLocked: 这一层的拓印还没有显影。
+	SummonBossPresent: 已有拓印在场。
+	DebugLedger: "[谱系] {0} → {1}"
+}
+
+Ledger: {
+	School: {
+		Melee: 近战
+		Ranged: 远程
+		Magic: 魔法
+		Summon: 召唤
+		Other: 其他
+	}
+
+	Range: {
+		Contact: 贴身
+		Near: 近
+		Mid: 中
+		Far: 远
+	}
+
+	Motion: {
+		Still: 静止
+		Walking: 行走
+		Dashing: 冲刺
+		Flying: 飞行
+	}
+
+	Approach: {
+		Front: 正面
+		Flank: 侧翼
+		Back: 背后
+	}
+
+	Posture: {
+		Normal: 常态
+		Skimmer: 掠影者
+		Waller: 间壁者
+		Folder: 折页者
+	}
+}
+
+Tooltips: {
+	CodexEmpty: 尚未留下任何动作。
+	CodexHeader: 世界记住了这些：
+	CodexUsage: 使用：擦去一条记录（无属性奖励）
+}
+
+Events: {
+	Started: 回响事件 · {0}
+	Completed: 「{0}」被记下了。地上多了一点东西。
+	Failed: 「{0}」散去了。你什么都没失去。
+	Cancelled: 回响事件被打断了。
+
+	BlankWalk: {
+		Name: 空走
+		Start: 地上浮出五个落点。用和上一局不同的路线，把它们依次踩过。
+		Hint: 慢慢走也算数，别沿着习惯的路线。
+	}
+
+	Offhand: {
+		Name: 换手
+		Start: 用不是你主导的那一类伤害，命中三次。
+		Hint: 换一件武器，或者换一种打法。
+	}
+
+	Counterscore: {
+		Name: 逆谱
+		Start: 用三种不同的伤害类型，各命中一次。
+		Hint: 近战、远程、魔法、召唤，凑齐三种。
+	}
+
+	Blank: {
+		Name: 留白
+		Start: 接下来一小段时间，不要造成任何伤害。
+		Hint: 停手，走位，等它过去。
+	}
+}

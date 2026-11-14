@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>《余响》Afterecho — 原创泰拉瑞亚模组设计案</title>
+<style>
+  :root {
+    --paper: #f7f4ec;
+    --ink: #2c2a27;
+    --muted: #7a746a;
+    --accent: #8a6a49;
+    --line: #ddd5c5;
+    --card: #fffdf8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0 18px 80px;
+    background: var(--paper); color: var(--ink);
+    font: 16px/1.85 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { padding: 42px 0 22px; border-bottom: 2px solid var(--ink); margin-bottom: 26px; }
+  header .kicker { font-size: 12px; letter-spacing: .28em; color: var(--accent); margin-bottom: 12px; }
+  header h1 { font-size: 30px; line-height: 1.3; margin: 0 0 10px; letter-spacing: .04em; }
+  header .sub { color: var(--muted); font-size: 14px; margin: 0; }
+  details.toc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 34px;
+  }
+  details.toc summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+  details.toc ol { margin: 12px 0 2px; padding-left: 20px; }
+  details.toc li { margin: 5px 0; }
+  details.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--line); }
+  h2 {
+    font-size: 21px; margin: 46px 0 16px; padding-left: 12px;
+    border-left: 4px solid var(--accent); scroll-margin-top: 16px;
+  }
+  h3 { font-size: 18px; margin: 30px 0 12px; }
+  p { margin: 12px 0; }
+  strong { color: #1d1b18; }
+  blockquote {
+    margin: 18px 0; padding: 12px 16px; background: var(--card);
+    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; color: #4a463f;
+  }
+  blockquote p { margin: 4px 0; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  table {
+    display: block; width: 100%; overflow-x: auto; border-collapse: collapse;
+    margin: 18px 0; font-size: 14px; background: var(--card);
+    -webkit-overflow-scrolling: touch;
+  }
+  th, td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; white-space: nowrap; }
+  th { background: #efe9dc; font-weight: 600; }
+  code {
+    background: #ece6d8; padding: 1px 5px; border-radius: 4px;
+    font-size: .9em; font-family: ui-monospace, Menlo, Consolas, monospace;
+  }
+  pre { background: #ece6d8; padding: 14px; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  sup.cite { color: var(--muted); font-size: 10px; margin-left: 1px; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+  .foot { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
+          color: var(--muted); font-size: 13px; text-align: center; }
+  a.top { display: block; text-align: center; color: var(--accent); font-size: 13px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">TERRARIA · ORIGINAL CONTENT MOD</div>
+  <h1>《余响》Afterecho</h1>
+  <p class="sub">原创泰拉瑞亚模组设计案 · 不改写世界 · 不堆数值 · 只记录你</p>
+</header>
+<details class="toc" open>
+  <summary>目录</summary>
+  <ol><li><a href="#sec-1">0. 一句话钩子</a></li>
+<li><a href="#sec-2">1. 借鉴边界：借鉴设计语言，不搬运任何机制</a></li>
+<li><a href="#sec-3">2. 三个原创核心系统</a></li>
+<li><a href="#sec-4">3. 平衡宪法（7 条，开发期不可协商）</a></li>
+<li><a href="#sec-5">4. 四幕进度与 Boss</a></li>
+<li><a href="#sec-6">5. 装备：12 件，全部横向，每件写死代价</a></li>
+<li><a href="#sec-7">6. 美术与叙事方向（原创，规避生物恐怖）</a></li>
+<li><a href="#sec-8">7. 兼容性与多人</a></li>
+<li><a href="#sec-9">8. 工程落地（本工程已可编译、可打包、可加载）</a></li>
+<li><a href="#sec-10">9. 为什么它「富有创意」且「不破坏平衡」</a></li></ol>
+</details>
+<article>
+<blockquote>
+<p>世界不记得你杀了谁，只记得你怎么杀的。</p>
+<p>类型：内容型拓展模组 / 目标版本：Terraria 1.4.4.9 + tModLoader 2026.4.3.0
+定位：<strong>叠加式</strong>内容（不改写主世界），4 幕进度、4 个 Boss、12 件横向装备、1 个可选挑战模式</p>
+</blockquote>
+<hr />
+<h2 id="sec-1">0. 一句话钩子</h2>
+<p>寄生模组让怪物感染世界，灾厄让世界堆满 Boss 和装备。《余响》反过来：</p>
+<p><strong>不是怪物入侵了世界，是世界开始记录你。</strong></p>
+<p>你反复使用的战术会在世界里留下「余响」，余响凝结成一层可进可出的相位空间「回响庭」。里面的敌人<strong>不会变强</strong>，它们只是<strong>学会你的打法</strong>。你要战胜的不是数值，而是自己的习惯。</p>
+<hr />
+<h2 id="sec-2">1. 借鉴边界：借鉴设计语言，不搬运任何机制</h2>
+<p>本模组只取两个参考对象的<strong>组织方式与氛围张力</strong>，机制、叙事、美术、数值体系全部另起炉灶。</p>
+<h3>参考对象的实际特征（用于明确规避）</h3>
+<ul>
+<li><strong>Scape and Run: Parasites</strong>：以「行为点数」而非游戏天数推进 13 个进化阶段；同化原版生物、侵染方块并生成寄生生物群系、无生物群系限制刷怪、白天不燃烧；合并系统、增援/巢穴系统、对伤害类型的适应系统；活体武器随累计伤害进化 <sup class="cite">3</sup><sup class="cite">4</sup><sup class="cite">8</sup><sup class="cite">10</sup>。</li>
+<li><strong>Calamity</strong>：25+ Boss、2000+ 物品、5 个新生物群系、新增 Rogue 职业、Revengeance / Death 难度模式、Boss Rush 连战、附魔与怒气/肾上腺素机制；同时改动原版 Boss 顺序、配方、NPC 商店与宝箱掉落 <sup class="cite">1</sup><sup class="cite">6</sup><sup class="cite">7</sup><sup class="cite">13</sup>。</li>
+</ul>
+<h3>对照表</h3>
+<table>
+<thead>
+<tr>
+  <th>抽象层：借鉴什么</th>
+  <th>具体层：明确不采用什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>「威胁随玩家行为推进」的叙事张力</td>
+  <td>感染、同化、侵染方块、进化阶段点数、增援巢穴、无限制刷怪、生物恐怖造型</td>
+</tr>
+<tr>
+  <td>「大体量、分幕、独立生态、可选挑战、终局仪式」的编排感</td>
+  <td>新职业、数值型难度模式、改动原版进度/配方/掉落表、连续 Boss 战、堆量式物品库</td>
+</tr>
+<tr>
+  <td>让每个 Boss 承担一次「玩法教学」的设计追求</td>
+  <td>以更高血量/伤害/弹幕密度作为难度来源</td>
+</tr>
+</tbody>
+</table>
+<p><strong>取的是骨架感，不是血肉。</strong> 下文所有系统均可独立成立，不依赖上述任一模组的机制或素材。</p>
+<hr />
+<h2 id="sec-3">2. 三个原创核心系统</h2>
+<h3>2.1 谱系 The Ledger — 世界的行为记忆</h3>
+<p>玩家造成的每一次有效命中，被归入一个<strong>四维战术指纹</strong>：</p>
+<table>
+<thead>
+<tr>
+  <th>维度</th>
+  <th>取值示例</th>
+  <th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>伤害类型</td>
+  <td>近战 / 远程 / 魔法 / 召唤</td>
+  <td>只作分类，不触发「抗性适应」</td>
+</tr>
+<tr>
+  <td>距离带</td>
+  <td>贴身 / 近 / 中 / 远</td>
+  <td>以命中瞬间与目标的水平距离分桶</td>
+</tr>
+<tr>
+  <td>位移状态</td>
+  <td>静止 / 行走 / 冲刺 / 飞行</td>
+  <td>采样玩家命中前 0.5 秒的速度</td>
+</tr>
+<tr>
+  <td>来向</td>
+  <td>正面 / 侧翼 / 背后</td>
+  <td>相对于目标朝向的角度</td>
+</tr>
+</tbody>
+</table>
+<p>维持一个<strong>最近 400 次命中的滑动窗口</strong>；主导战术只读其中最近 120 次（约 20 秒的密集输出），完整窗口用于统计「本局最高频动作」。这样「换打法 ≈ 20 秒见效」与「终局记住你整局习惯」同时成立。</p>
+<p>设计约束：</p>
+<ul>
+<li><strong>不显示数值</strong>。玩家看不到进度条与百分比，只能通过回响庭的地面纹路走向、敌人站位习惯、环境音音色变化「读懂」自己被记住了什么。信息靠观察获得，不靠 UI 投喂。</li>
+<li><strong>只在回响庭内生效</strong>。回到主世界，谱系完全不参与任何判定。</li>
+<li><strong>只影响敌人配置与姿态，不影响任何数值</strong>（见 2.3）。</li>
+<li>滑动窗口意味着：换打法 ≈ 20 秒内就能改变世界的回应方式，不存在不可逆的雪球。</li>
+</ul>
+<blockquote>
+<p>与寄生模组「适应系统」的本质区别：适应是<strong>敌人对伤害类型堆叠减免</strong>，逼玩家换用火攻或打弱点重置；《余响》是<strong>对玩家整体行为画像的镜像回应</strong>，破解方式是改变自己的打法，没有任何「重置按钮」或「克制伤害类型」。</p>
+</blockquote>
+<h3>2.2 回响庭 The Reverie — 不改写地形的叠加生态</h3>
+<p>用道具「相位镜」在当前坐标切入一层<strong>叠加空间</strong>：</p>
+<ul>
+<li>地形轮廓与主世界完全一致（建筑、箱子、NPC 仍在，呈半透明冻结态），<strong>不修改任何 tile、不生成任何方块、不新增世界生成矿物</strong>。</li>
+<li>退出后主世界逐字节原样，卸载模组的存档也无需清理。这是对「感染扩散会污染存档」这一问题的结构性修正。</li>
+<li>用「<strong>稳定度</strong>」替代「感染度」：进入时 100%，随停留缓慢下降，归零自动弹出并<strong>保留已获得的材料</strong>。不惩罚、不扩散、不蔓延。</li>
+<li><strong>不在主世界自然生成任何本模组敌怪</strong>；不占用刷怪名额、不改变主世界刷怪率、不占用城镇 NPC 名额。</li>
+<li>多人游戏中回响庭为共享实例，姿态按队伍谱系的<strong>均值</strong>决定，避免单人被针对性针对。</li>
+</ul>
+<blockquote>
+<p>与灾厄「新生物群系」的区别：灾厄的深渊、硫磺海、星辉瘟疫等是写入世界地形、带独立资源与危险的<strong>永久区域</strong> <sup class="cite">1</sup><sup class="cite">6</sup>；回响庭是<strong>临时的、玩家主动召唤的、零写入的相位层</strong>。</p>
+</blockquote>
+<h3>2.3 反谱 Counterform — 只改行为，不改数值</h3>
+<p>这是「不破坏平衡」的技术核心。</p>
+<p>敌人依据谱系切换<strong>姿态</strong>，例如：</p>
+<table>
+<thead>
+<tr>
+  <th>玩家主导战术</th>
+  <th>出现的姿态</th>
+  <th>具体行为变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>远距离·静止·远程</td>
+  <td>掠影者</td>
+  <td>绕后位移、缩短接敌路径</td>
+</tr>
+<tr>
+  <td>贴身·冲刺·近战</td>
+  <td>间壁者</td>
+  <td>保持距离、后退式弹幕</td>
+</tr>
+<tr>
+  <td>中距离·静止·魔法</td>
+  <td>折页者</td>
+  <td>打断吟唱节奏、错位落点</td>
+</tr>
+</tbody>
+</table>
+<p><strong>硬约束（写入代码常量，见 <code>Common/Balance.cs</code>）：</strong></p>
+<ul>
+<li>姿态<strong>不改变</strong>敌人的 <code>lifeMax</code>、<code>damage</code>、<code>defense</code>、<code>速度上限</code>、<code>免疫帧</code>。</li>
+<li>姿态只改：AI 决策树、弹幕轨迹、站位偏好、以及一个 <code>±12%</code> 的软抗性（有上限、可叠加次数为 1）。</li>
+<li>深谱模式下允许弹幕数量增加，但<strong>单发伤害按数量反比下调</strong>，使「单位时间承伤压力」恒定。</li>
+</ul>
+<p>结果：难度上限被锁死在同进度原版锚点附近，玩家永远可以通过<strong>换武器、换距离、多位移</strong>破解，而不是被迫刷更强的装备。博弈发生在「玩家 ↔ 自己的习惯」之间，不在数值军备竞赛里。</p>
+<hr />
+<h2 id="sec-4">3. 平衡宪法（7 条，开发期不可协商）</h2>
+<ol>
+<li><strong>零改写</strong>：不改 tile、不改原版合成配方、不改原版掉落表、不改原版 Boss 顺序、不改 NPC 商店、不改原版物品属性。</li>
+<li><strong>零侵入生成</strong>：主世界不自然生成任何本模组敌怪；全部内容需玩家主动进入回响庭。</li>
+<li><strong>数值天花板</strong>：任一阶段，本模组装备的 DPS / 防御 / 生命加成 ≤ 同进度原版同级装备的 <strong>105%</strong>，且必须附带等量代价（第 4 条）。</li>
+<li><strong>横向装备</strong>：装备只提供玩法变化（弹道形状、位移方式、资源循环、谱系控制），不做纯数值上位替代；<strong>每件装备都写死一条代价</strong>。</li>
+<li><strong>难度只改行为</strong>：可选挑战「深谱」只改 AI 与弹幕编排，生命/伤害倍率恒为 <code>1.00</code>；<strong>默认关闭</strong>。</li>
+<li><strong>可完全关闭与零残留</strong>：配置项一键停用谱系与回响庭；谱系只存在玩家运行时数据中，<strong>不写入世界存档</strong>，卸载后存档无残留。</li>
+<li><strong>不越阶</strong>：所有 Boss 与装备解锁锚点挂在原版进度之后，首次可挑战时机不早于对应原版 Boss。</li>
+</ol>
+<h3>数值锚点表（对齐原版同进度，非实测值，为开发上限）</h3>
+<table>
+<thead>
+<tr>
+  <th>幕</th>
+  <th>原版锚点</th>
+  <th>原版同级武器 DPS 量级</th>
+  <th>本模组武器 DPS 上限</th>
+  <th>系数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>第一幕</td>
+  <td>克苏鲁之眼后</td>
+  <td>45–60</td>
+  <td>≤ 58</td>
+  <td>0.97</td>
+</tr>
+<tr>
+  <td>第二幕</td>
+  <td>血肉墙后</td>
+  <td>90–130</td>
+  <td>≤ 125</td>
+  <td>0.96</td>
+</tr>
+<tr>
+  <td>第三幕</td>
+  <td>世纪之花后</td>
+  <td>200–280</td>
+  <td>≤ 265</td>
+  <td>0.95</td>
+</tr>
+<tr>
+  <td>第四幕</td>
+  <td>月亮领主后</td>
+  <td>400–600</td>
+  <td>≤ 570</td>
+  <td>0.95</td>
+</tr>
+</tbody>
+</table>
+<p>Boss 生命/伤害对齐同锚点原版 Boss 的 <code>0.90–1.05</code> 倍；深谱模式生命与伤害乘数固定 <code>1.00</code>，仅弹幕条数 <code>+25%</code> 且单发伤害 <code>×0.80</code>（总压力 <code>1.00</code>）。</p>
+<hr />
+<h2 id="sec-5">4. 四幕进度与 Boss</h2>
+<table>
+<thead>
+<tr>
+  <th>幕</th>
+  <th>解锁锚点</th>
+  <th>回响庭层</th>
+  <th>Boss</th>
+  <th>承担的玩法教学</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>一 · 初痕</td>
+  <td>击败克苏鲁之眼</td>
+  <td>浅庭</td>
+  <td>描摹者 The Tracer</td>
+  <td>读懂「姿态」</td>
+</tr>
+<tr>
+  <td>二 · 复写</td>
+  <td>击败血肉墙</td>
+  <td>褶庭</td>
+  <td>对页 The Verso</td>
+  <td>主动切换战术</td>
+</tr>
+<tr>
+  <td>三 · 逆谱</td>
+  <td>击败世纪之花</td>
+  <td>逆庭</td>
+  <td>缄口 The Hush</td>
+  <td>放弃单一武器</td>
+</tr>
+<tr>
+  <td>四 · 全谱</td>
+  <td>击败月亮领主</td>
+  <td>全谱庭</td>
+  <td>余响本身 The Afterecho</td>
+  <td>面对自己的习惯</td>
+</tr>
+</tbody>
+</table>
+<p>每幕另配 1 个<strong>可选回响事件</strong>（非 Boss，是玩法小挑战，如「限时走出与上一局完全不同的路线」），共 4 个；全部可跳过，不影响主线解锁。</p>
+<h3>4.1 描摹者 The Tracer（第一幕）</h3>
+<p>它几乎不主动攻击，而是在场地里<strong>描出玩家上一场战斗的移动轨迹</strong>；轨迹在 3 秒后实体化为伤害带。</p>
+<p>玩家必须刻意走出与以往不同的路线才能安全输出。这是对「世界在记录你」最直观的教学，全程不靠血量压制。阶段切换只改变描摹的<strong>采样延迟</strong>（3s → 2s → 1.2s），数值恒定。</p>
+<h3>4.2 对页 The Verso（第二幕）</h3>
+<p>书页形态 Boss，每一「页」对应玩家谱系里权重最高的一种战术。它在权重前二的战术间轮流翻页；当玩家使用<strong>第三战术</strong>命中时，书页短暂「空白」（硬直窗口）。</p>
+<p>鼓励配装多样性，且硬直由玩家行为触发，不靠计时器。</p>
+<h3>4.3 缄口 The Hush（第三幕）</h3>
+<p>周期性「收录」玩家当前武器的音效：被收录的武器 6 秒内不造成伤害，但每次挥击积累「未言」层数；切换武器后，层数一次性释放为范围回响。</p>
+<p>强制换武器，但把惩罚转化成了资源——被封印的 6 秒不是空窗，而是蓄力。</p>
+<h3>4.4 余响本身 The Afterecho（第四幕 · 终局）</h3>
+<p>它没有固定招式。开场从玩家整局谱系中抽取 <strong>5 个最高频动作</strong>，生成 5 个半透明「残影」依次登场，每个残影只会玩家最擅长的那一招。</p>
+<p><strong>你打的是自己的习惯。</strong> 残影数值与玩家当前装备挂钩但乘数 ≤ 1.0，因此变强不会让终局变简单，只会让镜像更熟悉。</p>
+<h3>4.5 终局可选模式：全谱回响</h3>
+<p>不是连续 Boss 战。每通过一关，玩家可主动<strong>擦除</strong>自己的一条谱系记录（相当于自定后续难度）；擦除越多，结算称号与外观奖励越特殊，但<strong>不提供任何属性奖励</strong>。玩家自己决定难度，因此不存在「强制超模挑战」破坏平衡。</p>
+<hr />
+<h2 id="sec-6">5. 装备：12 件，全部横向，每件写死代价</h2>
+<table>
+<thead>
+<tr>
+  <th>装备</th>
+  <th>类型</th>
+  <th>玩法变化</th>
+  <th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>折光刃</td>
+  <td>近战</td>
+  <td>挥砍不出剑气，0.8 秒后在<strong>玩家上一秒所在位置</strong>生成回响斩</td>
+  <td>本体伤害为同阶剑的 70%</td>
+</tr>
+<tr>
+  <td>错位弦</td>
+  <td>远程</td>
+  <td>下一支箭从上一支箭的落点射出，可搭建「落点链」</td>
+  <td>单发伤害 −25%，不享受暴击加成</td>
+</tr>
+<tr>
+  <td>残页</td>
+  <td>魔法</td>
+  <td>释放「未写完的一页」，3 秒后补完为范围伤害，补完位置跟随玩家移动</td>
+  <td>魔力消耗 ×1.6，无法连续吟唱</td>
+</tr>
+<tr>
+  <td>回声砂</td>
+  <td>材料</td>
+  <td>回响庭稳定度低于 30% 时才掉落，鼓励压线探索</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>残谱</td>
+  <td>材料</td>
+  <td>用于重铸装备的「代价」条目</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>静默坠</td>
+  <td>饰品</td>
+  <td>谱系滑动窗口缩短一半，更快摆脱被针对</td>
+  <td>稳定度消耗 +20%</td>
+</tr>
+<tr>
+  <td>双向镜</td>
+  <td>饰品</td>
+  <td>在庭内手动回滚一次谱系快照，强制姿态重算</td>
+  <td>稳定度 −15%</td>
+</tr>
+<tr>
+  <td>未言坠</td>
+  <td>饰品</td>
+  <td>被「缄口」收录时，未言层数额外 +1</td>
+  <td>收录时长 +1 秒</td>
+</tr>
+<tr>
+  <td>折页靴</td>
+  <td>饰品</td>
+  <td>冲刺末段留一个短暂残影，残影可承接一次回响斩</td>
+  <td>冲刺速度 −10%</td>
+</tr>
+<tr>
+  <td>留白戒</td>
+  <td>饰品</td>
+  <td>连续 3 次不使用主导战术时，短暂免疫一次软抗性</td>
+  <td>触发后 8 秒内无法再次触发</td>
+</tr>
+<tr>
+  <td>相位镜</td>
+  <td>工具</td>
+  <td>切入/退出回响庭</td>
+  <td>有 20 秒冷却，Boss 战中不可用</td>
+</tr>
+<tr>
+  <td>全谱拓本</td>
+  <td>终局纪念</td>
+  <td>记录本局 5 个最高频动作，纯外观/称号</td>
+  <td>无任何属性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>合成只用原版材料</strong>（玻璃、透镜、落星、各类魂、碎片等），不新增矿物、不改写世界生成、不新增制作站。</p>
+<hr />
+<h2 id="sec-7">6. 美术与叙事方向（原创，规避生物恐怖）</h2>
+<ul>
+<li><strong>视觉母题</strong>：纸、墨、声纹、留白、半透明拓印。不是血肉虫巢，也不是末日天灾。</li>
+<li><strong>敌人</strong>：像被擦掉一半的铅笔稿，动作带残影；受击时不是溅血，而是<strong>墨迹晕开</strong>。</li>
+<li><strong>回响庭</strong>：主世界建筑以褪色拓片形式浮现，地面纹路随谱系走向缓慢改变。</li>
+<li><strong>音频</strong>：极简环境音，音色随玩家主导战术偏移（近战偏低频、魔法偏泛音），不使用现成曲库素材。</li>
+<li><strong>叙事</strong>：没有入侵，没有灾厄，没有需要被净化的感染。世界只是开始记录。最终 Boss 是你自己的习惯——主题落在「熟练的代价」，这在两个参考模组里都不存在。</li>
+</ul>
+<hr />
+<h2 id="sec-8">7. 兼容性与多人</h2>
+<ul>
+<li>不硬依赖任何模组；用弱引用方式向 Boss Checklist 等提供进度读取（可选，失败即跳过）。</li>
+<li>因不改写原版进度/配方/掉落，可与其他大型内容模组同装；进度锚点统一用 <code>NPC.downed*</code> 判定，对方改动 Boss 顺序也不会错位。</li>
+<li>多人：谱系<strong>按玩家独立记录</strong>；回响庭为共享实例，姿态取队伍均值；稳定度按队伍人数归一化，避免单人被拖长惩罚。</li>
+<li>服务端配置项统一，防止客户端配置不同导致谱系判定分歧。</li>
+</ul>
+<hr />
+<h2 id="sec-9">8. 工程落地（本工程已可编译、可打包、可加载）</h2>
+<p>按 tModLoader 1.4.4 标准结构组织：<code>Mod</code> 主类、<code>build.txt</code>、<code>description.txt</code>、<code>.csproj</code>、<code>Content/</code>、<code>Common/</code>、<code>Localization/</code> <sup class="cite">2</sup><sup class="cite">9</sup><sup class="cite">12</sup>。当前交付 <strong>28 个 .cs / 37 个 Mod 内容类 / 31 张程序化内容贴图 + 2 张模组图标</strong>，中英本地化齐全并已实测生效。</p>
+<p>已落地的核心系统：</p>
+<ul>
+<li><strong>平衡宪法</strong>：<code>Common/Balance.cs</code> 把装备系数、Boss 数值区间、软抗性上限、深谱倍率全部写成常量，加载期断言；<code>ScaleVolley()</code> 保证「弹幕条数 × 单发伤害」不超原预算，所有 Boss 都走它。</li>
+<li><strong>谱系</strong>：<code>Common/LedgerPlayer.cs</code> 实现四维战术指纹、400 次滑动窗口、快照回滚、战斗轨迹、封印与未言层数、装备标志、Top5 动作与擦除记录；<code>AfterechoGlobalItem</code> / <code>AfterechoGlobalProjectile</code> 从真实命中取距离、来向、位移与伤害类型，召唤物命中带节流。数据只在运行时，不写存档。</li>
+<li><strong>回响庭</strong>：<code>Common/ReverieSystem.cs</code> 是共享实例层 —— 单一稳定度真源、队伍姿态均值、庭内生成节流、退出时清理全部庭属 NPC 与敌对弹幕；<code>Content/Biomes/ReverieBiome.cs</code> 只做场景效果，零 tile 写入。</li>
+<li><strong>四幕 Boss</strong>：描摹者重演玩家上一场轨迹；对页在权重前二战术间翻页、第三战术触发空白硬直；缄口收录武器并把封印转成蓄力；余响本身抽出 5 个高频动作生成残影。四幕召唤物都带「必须在庭内 + 层数达标 + 无 Boss 在场」的代码门控。</li>
+<li><strong>12 件横向装备</strong>：3 件武器、2 件材料、5 件饰品、相位镜、全谱拓本，每件都带写死的代价；全谱拓本可主动擦除一条记录且不给属性。</li>
+<li><strong>软抗性</strong>：<code>ReverieGlobalNPC</code> 在针对性姿态生效时施加 ≤12% 减伤，换打法回「常态」即归零，留白戒可跳过一次。</li>
+<li><strong>4 个可选回响事件</strong>：<code>Common/EchoEvents.cs</code> 实现空走 / 换手 / 逆谱 / 留白，只读取玩家行为（落点、伤害类型、是否出手），Boss 战自动打断，全部可跳过、只给材料、不影响主线解锁。</li>
+</ul>
+<p><strong>本版验收记录（2026-11-14）</strong>：</p>
+<ul>
+<li><code>dotnet build</code> 通过，tModLoader 2026.9.3.1 构建管线打包出 <code>Afterecho.tmod</code>。</li>
+<li>无头服务端加载：Finding → Adding → Configuring → Finalizing Content → Adding Recipes 全部通过，无异常。</li>
+<li>用 1 个小世界完整跑过「世界生成 → 保存 → 读取 → 开服」，服务端连续 tick 无异常；测试世界已删除。</li>
+<li>四个 Boss 的生命值在 <code>SetDefaults</code> 里对 0.90–1.05 锚点做加载期断言，改动超区间会直接拒绝加载。</li>
+<li><strong>中英双语实测</strong>：以 <code>language=zh-Hans</code> 启动服务端验证，物品名、事件名、聊天消息、配置标签均解析为中文；<code>en-US</code> 同样正确。</li>
+<li><code>tools/check.py</code> 静态检查：28 个 .cs / 37 个类 / 33 张贴图，0 错误 0 警告。</li>
+</ul>
+<blockquote>
+<p><strong>本地化格式注意</strong>：文件名已经带前缀，内容就不要再套前缀 —— <code>Localization/zh-Hans_Mods.Afterecho.hjson</code> 的根节点直接写 <code>Items:</code> / <code>NPCs:</code> / <code>Configs:</code> / <code>Messages:</code> / <code>Events:</code>。写成 <code>Mods: { Afterecho: { ... } }</code> 会让整份文件不生效、游戏内全部回退英文（v0.1 的实际情况）。</p>
+</blockquote>
+<p><strong>仍未完成（诚实清单）</strong>：</p>
+<ul>
+<li><strong>美术 / 音频</strong>：贴图与音效是程序化占位 / 原版 ID，正式美术仍需原创像素素材、四层色调、声纹环境音与 Boss 血条样式。</li>
+<li><strong>实机游玩验证</strong>：本机没有可自动操作的图形客户端，只做了编译、打包、无头加载与世界读写；<strong>数值手感、四幕节奏、Boss 伤害密度必须实际开一局校准</strong>。</li>
+<li><strong>多人联机</strong>：共享实例目前是「服务端推进、客户端表现」的简化实现，未做独立联机回归；谱系按玩家本地记录。</li>
+<li><strong>Boss Checklist</strong>：按 5 参数 <code>LogBoss</code> 调用并逐条 try/catch，装了不同版本时可能静默跳过。</li>
+<li><strong>数值校准</strong>：Boss 生命已按锚点写死并断言，但伤害、防御与弹幕密度仍是占位值。</li>
+</ul>
+<hr />
+<h2 id="sec-10">9. 为什么它「富有创意」且「不破坏平衡」</h2>
+<ul>
+<li><strong>创意</strong>：核心冲突从「玩家 vs 怪物」换成「玩家 vs 自己的熟练度」；Boss 招式来自玩家真实行为数据；终局奖励是擦除自己的记录而非更强装备。</li>
+<li><strong>平衡</strong>：零地形写入、零主世界生成、零原版改动；装备横向且有代价；难度只改行为且乘数锁死 1.00；进度全部挂原版锚点之后；玩家随时可以一键关掉整个系统。</li>
+<li><strong>不抄袭</strong>：借用「行为驱动威胁」和「分幕大体量」两个抽象概念，具体的感染/进化/同化/巢穴、新职业/数值难度/连战/改原版进度，一条都不用。</li>
+</ul>
+<p>熟练本来是件好事。这个模组只是温柔地问一句：<strong>如果被它记住了呢？</strong></p>
+
+</article>
+<a class="top" href="#">↑ 回到顶部</a>
+<div class="foot">《余响 / Afterecho》原创企划 · 纸 · 墨 · 声纹 · 留白</div>
+</div>
+</body>
+</html>

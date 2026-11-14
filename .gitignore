@@ -1,0 +1,19 @@
+# tModLoader 构建产物
+Afterecho/bin/
+Afterecho/obj/
+*.tmod
+*.tmod.bak
+
+# 编辑器 / 系统
+.vs/
+.vscode/
+*.user
+*.suo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 本地工具 / 临时文件
+.tools/
+*.7z
+*.log
