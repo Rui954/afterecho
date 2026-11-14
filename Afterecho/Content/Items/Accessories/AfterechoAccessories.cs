@@ -127,7 +127,8 @@ namespace Afterecho.Content.Items.Accessories
             => player.GetModPlayer<LedgerPlayer>().HasBlankRing = true;
 
         public override void AddRecipes() => CreateRecipe()
-            .AddIngredient(ItemID.SilverBar, 6)
+            // 银锭或钨锭：世界只会生成其中一种，配方组保证两边都能做。
+            .AddRecipeGroup(AfterechoRecipeGroups.SilverBarGroup, 6)
             .AddIngredient(ModContent.ItemType<RescorePage>(), 3)
             .AddTile(TileID.Tables).Register();
     }

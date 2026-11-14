@@ -288,3 +288,8 @@ Events: {
 		Hint: 停手，走位，等它过去。
 	}
 }
+
+RecipeGroups: {
+	GoldBar: 金锭或铂金锭
+	SilverBar: 银锭或钨锭
+}

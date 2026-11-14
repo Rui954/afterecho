@@ -443,7 +443,7 @@
 </ul>
 <hr />
 <h2 id="sec-9">8. 工程落地（本工程已可编译、可打包、可加载）</h2>
-<p>按 tModLoader 1.4.4 标准结构组织：<code>Mod</code> 主类、<code>build.txt</code>、<code>description.txt</code>、<code>.csproj</code>、<code>Content/</code>、<code>Common/</code>、<code>Localization/</code> <sup class="cite">2</sup><sup class="cite">9</sup><sup class="cite">12</sup>。当前交付 <strong>28 个 .cs / 37 个 Mod 内容类 / 31 张程序化内容贴图 + 2 张模组图标</strong>，中英本地化齐全并已实测生效。</p>
+<p>按 tModLoader 1.4.4 标准结构组织：<code>Mod</code> 主类、<code>build.txt</code>、<code>description.txt</code>、<code>.csproj</code>、<code>Content/</code>、<code>Common/</code>、<code>Localization/</code> <sup class="cite">2</sup><sup class="cite">9</sup><sup class="cite">12</sup>。当前交付 <strong>29 个 .cs / 37 个 Mod 内容类 / 31 张程序化内容贴图 + 2 张模组图标</strong>，中英本地化齐全并已实测生效。</p>
 <p>已落地的核心系统：</p>
 <ul>
 <li><strong>平衡宪法</strong>：<code>Common/Balance.cs</code> 把装备系数、Boss 数值区间、软抗性上限、深谱倍率全部写成常量，加载期断言；<code>ScaleVolley()</code> 保证「弹幕条数 × 单发伤害」不超原预算，所有 Boss 都走它。</li>
@@ -461,7 +461,8 @@
 <li>用 1 个小世界完整跑过「世界生成 → 保存 → 读取 → 开服」，服务端连续 tick 无异常；测试世界已删除。</li>
 <li>四个 Boss 的生命值在 <code>SetDefaults</code> 里对 0.90–1.05 锚点做加载期断言，改动超区间会直接拒绝加载。</li>
 <li><strong>中英双语实测</strong>：以 <code>language=zh-Hans</code> 启动服务端验证，物品名、事件名、聊天消息、配置标签均解析为中文；<code>en-US</code> 同样正确。</li>
-<li><code>tools/check.py</code> 静态检查：28 个 .cs / 37 个类 / 33 张贴图，0 错误 0 警告。</li>
+<li><strong>配方组兼容世界生成</strong>：折光刃的「金锭」与留白戒的「银锭」改用配方组（金/铂金、银/钨），避免只生成另一种金属的世界做不出这两件装备；配方数量与代价不变。</li>
+<li><code>tools/check.py</code> 静态检查：29 个 .cs / 37 个类 / 33 张贴图，0 错误 0 警告。</li>
 </ul>
 <blockquote>
 <p><strong>本地化格式注意</strong>：文件名已经带前缀，内容就不要再套前缀 —— <code>Localization/zh-Hans_Mods.Afterecho.hjson</code> 的根节点直接写 <code>Items:</code> / <code>NPCs:</code> / <code>Configs:</code> / <code>Messages:</code> / <code>Events:</code>。写成 <code>Mods: { Afterecho: { ... } }</code> 会让整份文件不生效、游戏内全部回退英文（v0.1 的实际情况）。</p>

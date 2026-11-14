@@ -283,3 +283,8 @@ Events: {
 		Hint: Hold your hand, keep moving, let it pass.
 	}
 }
+
+RecipeGroups: {
+	GoldBar: Gold Bar or Platinum Bar
+	SilverBar: Silver Bar or Tungsten Bar
+}

@@ -29,7 +29,8 @@ namespace Afterecho.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.GoldBar, 8)
+                // 金锭或铂金锭：世界只会生成其中一种，配方组保证两边都能做。
+                .AddRecipeGroup(AfterechoRecipeGroups.GoldBarGroup, 8)
                 .AddIngredient(ModContent.ItemType<EchoShard>(), 6)
                 .AddTile(TileID.Anvils)
                 .Register();

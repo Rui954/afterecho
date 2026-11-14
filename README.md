@@ -6,8 +6,8 @@
 
 **你会喜欢它，如果**：你厌倦了「更强的怪、更高的数值」，想要一场和自己习惯的博弈。
 
-- 📖 [设计案（Markdown）](余响_模组设计案.md) · [手机版设计案](余响_设计案.html)
-- 🎮 [玩家指南（流程 / 触发 / 常见问题）](余响_玩家指南.html)
+- 📖 [设计案（Markdown）](余响_模组设计案.md) · [手机版设计案](afterecho_Design.html)
+- 🎮 [玩家指南（流程 / 触发 / 常见问题）](<afterecho_Player Guide.html>)
 - 🧩 源码：[`Afterecho/`](Afterecho)
 
 ---
@@ -34,7 +34,7 @@
 1. 到 [Releases](https://github.com/Rui954/afterecho/releases) 下载 `Afterecho.tmod`；
 2. 放进 `Documents/My Games/Terraria/tModLoader/Mods/`；
 3. 启动 tModLoader → **Mods** → 启用《余响》→ **Reload Mods**；
-4. 进游戏，按 [玩家指南](余响_玩家指南.html) 走：**玻璃 10 + 透镜 1 + 落星 3** 在工作台做「相位镜」，击败克苏鲁之眼后即可展开回响庭。
+4. 进游戏，按 [玩家指南](<afterecho_Player Guide.html>) 走：**玻璃 10 + 透镜 1 + 落星 3** 在工作台做「相位镜」，击败克苏鲁之眼后即可展开回响庭。
 
 > 模组不写世界存档、不新增矿物、不改原版配方与掉落，卸载后存档零残留。
 
@@ -82,8 +82,9 @@ dotnet build
 afterecho/
 ├── README.md
 ├── 余响_模组设计案.md              # 完整设计案（第 8 节含工程与验收记录）
-├── 余响_设计案.html                # 同一份内容的移动端网页版
-├── 余响_玩家指南.html              # 玩家向：流程 / 触发 / 常见问题
+├── afterecho_Design.html           # 同一份内容的移动端网页版
+├── afterecho_Player Guide.html     # 玩家向：流程 / 触发 / 常见问题 / 完整配方表
+├── LICENSE                         # AGPL-3.0
 └── Afterecho/                      # tModLoader 1.4.4 工程（可直接复制进 ModSources）
     ├── Afterecho.cs                # Mod 主类：Balance.Validate + Boss Checklist 弱登记
     ├── Afterecho.csproj / build.txt / description.txt / icon.png / icon_small.png
